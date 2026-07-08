@@ -1,4 +1,4 @@
-# CaseSim
+# CasePartner
 
 A local desktop app for practicing consulting-style case interviews, solo. Upload a case PDF, and a locally-run (or free-tier cloud) LLM plays the interviewer — reading the prompt aloud, answering clarifying questions, surfacing exhibits at the right moments, and holding a spoken conversation. When you finish, it generates a coached review: scored rubric, your structure vs. the expert framework, turn-by-turn coaching notes, and progress tracking across sessions.
 
@@ -53,7 +53,7 @@ ollama pull llama3.2               # fallback (optional, small)
 The app transcribes your voice locally with whisper.cpp — WebView2 has no built-in speech recognition. Put the binary and a model where the app looks for them:
 
 ```powershell
-$dir = "$env:APPDATA\com.swath.casesim\whisper"
+$dir = "$env:APPDATA\com.casepartner.app\whisper"
 New-Item -ItemType Directory -Force $dir | Out-Null
 
 # whisper.cpp Windows binaries (check releases for the latest version)
@@ -70,7 +70,7 @@ The app finds `whisper-cli.exe` (or `main.exe`) plus any `ggml-*.bin` in that fo
 
 ### 4. Kokoro natural voice (optional)
 
-The default interviewer voice uses Windows TTS (instant but robotic). For a natural neural voice, the app can use [Kokoro-82M](https://github.com/hexgrad/kokoro) running fully locally via a small Node sidecar (`scripts/kokoro-server.mjs`, started automatically by the app — or manually with `npm run kokoro`). Nothing to install beyond `npm install`; the ~86 MB model downloads itself on first use and caches under `%APPDATA%\com.swath.casesim\kokoro-cache`.
+The default interviewer voice uses Windows TTS (instant but robotic). For a natural neural voice, the app can use [Kokoro-82M](https://github.com/hexgrad/kokoro) running fully locally via a small Node sidecar (`scripts/kokoro-server.mjs`, started automatically by the app — or manually with `npm run kokoro`). Nothing to install beyond `npm install`; the ~86 MB model downloads itself on first use and caches under `%APPDATA%\com.casepartner.app\kokoro-cache`.
 
 Enable it in **Setup → Interviewer voice → Engine → Kokoro**. On a CPU-only machine expect ~4s before the interviewer starts speaking each reply (sentences are pipelined, so it keeps talking once started).
 
@@ -96,7 +96,7 @@ Open the **Setup** tab:
 - Supabase URL + anon key
 - Interviewer voice: engine (System / Kokoro), voice, rate, on/off
 
-The health panel shows a check per dependency — get them green and you're set. Settings persist to `%APPDATA%\com.swath.casesim\settings.json` (outside the repo, so secrets never end up in git).
+The health panel shows a check per dependency — get them green and you're set. Settings persist to `%APPDATA%\com.casepartner.app\settings.json` (outside the repo, so secrets never end up in git).
 
 > **Gemini free-tier quota:** `gemini-2.5-flash` allows ~20 requests/day — one interview turn = one request, so it can run out mid-session. `gemini-2.5-flash-lite` has a much higher daily cap, or switch the provider back to Ollama when quota runs dry (resets midnight Pacific). Free-tier inputs may be used by Google for training; use Ollama if that matters for your material.
 
@@ -112,11 +112,11 @@ The health panel shows a check per dependency — get them green and you're set.
 
 | Data | Location |
 |---|---|
-| Settings (incl. API keys) | `%APPDATA%\com.swath.casesim\settings.json` |
-| Parsed cases (local copy) | `%APPDATA%\com.swath.casesim\cases\` |
-| Session transcripts (local copy) | `%APPDATA%\com.swath.casesim\sessions\` |
-| Whisper binary + model | `%APPDATA%\com.swath.casesim\whisper\` |
-| Kokoro model cache | `%APPDATA%\com.swath.casesim\kokoro-cache\` |
+| Settings (incl. API keys) | `%APPDATA%\com.casepartner.app\settings.json` |
+| Parsed cases (local copy) | `%APPDATA%\com.casepartner.app\cases\` |
+| Session transcripts (local copy) | `%APPDATA%\com.casepartner.app\sessions\` |
+| Whisper binary + model | `%APPDATA%\com.casepartner.app\whisper\` |
+| Kokoro model cache | `%APPDATA%\com.casepartner.app\kokoro-cache\` |
 | Cases / sessions / reviews (queryable) | your Supabase project |
 
 Local files are authoritative; Supabase sync is best-effort and failures never lose data.

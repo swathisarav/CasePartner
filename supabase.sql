@@ -1,4 +1,4 @@
--- CaseSim schema. Run once in the Supabase dashboard: SQL Editor -> New query.
+-- CasePartner schema. Run once in the Supabase dashboard: SQL Editor -> New query.
 -- Single-user local app: the anon key gets full access via permissive policies.
 
 create table if not exists cases (

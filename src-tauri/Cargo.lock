@@ -411,7 +411,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "casesim"
+name = "casepartner"
 version = "0.1.0"
 dependencies = [
  "serde",

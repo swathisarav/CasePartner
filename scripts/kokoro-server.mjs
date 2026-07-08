@@ -1,6 +1,6 @@
 // Kokoro TTS sidecar: a tiny localhost HTTP server the app talks to for
 // natural interviewer speech. Fully local — the model (~86 MB, q8) downloads
-// from HuggingFace once and is cached under %APPDATA%\com.swath.casesim.
+// from HuggingFace once and is cached under %APPDATA%\com.casepartner.app.
 // Run manually with `npm run kokoro`, or let the app auto-start it.
 import http from "node:http";
 import path from "node:path";
@@ -12,7 +12,7 @@ const MODEL = "onnx-community/Kokoro-82M-v1.0-ONNX";
 
 env.cacheDir = path.join(
   process.env.APPDATA ?? ".",
-  "com.swath.casesim",
+  "com.casepartner.app",
   "kokoro-cache"
 );
 

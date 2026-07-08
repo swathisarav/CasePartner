@@ -21,7 +21,7 @@ type Mode =
   | { kind: "addJson" }
   | { kind: "error"; message: string };
 
-const WELCOME_KEY = "casesim.welcomeDismissed";
+const WELCOME_KEY = "casepartner.welcomeDismissed";
 
 export function CasesScreen({ settings, onStartInterview }: Props) {
   const [cases, setCases] = useState<CaseData[]>([]);
@@ -140,7 +140,7 @@ export function CasesScreen({ settings, onStartInterview }: Props) {
           <button className="welcome-dismiss" onClick={dismissWelcome} aria-label="Dismiss">
             ×
           </button>
-          <h2>Welcome to CaseSim</h2>
+          <h2>Welcome to CasePartner</h2>
           <p className="welcome-lead">
             Rehearse full case interviews out loud, solo, and get coached feedback. Here's
             how the app works:
@@ -148,7 +148,7 @@ export function CasesScreen({ settings, onStartInterview }: Props) {
           <ol className="welcome-steps">
             <li>
               <strong>Pick a case.</strong> Jump into a built-in case below, or upload your
-              own case PDF and CaseSim structures it into a playable case.
+              own case PDF and CasePartner structures it into a playable case.
             </li>
             <li>
               <strong>Run the interview.</strong> The AI interviewer speaks and responds;
@@ -247,7 +247,7 @@ export function CasesScreen({ settings, onStartInterview }: Props) {
         {yourCases.length === 0 && !busy && !listError && (
           <p className="empty-note">
             No uploaded cases yet. Practice with a built-in case above, or upload a case
-            PDF and CaseSim will structure it for you.
+            PDF and CasePartner will structure it for you.
           </p>
         )}
 

@@ -57,7 +57,7 @@ export function InterviewScreen({ settings, caseData, onExit }: Props) {
   const [micState, setMicState] = useState<"idle" | "recording" | "transcribing">("idle");
   const [handsFree, setHandsFree] = useState(false);
   const [tipsOn, setTipsOn] = useState(
-    () => localStorage.getItem("casesim.tipsOff") !== "1"
+    () => localStorage.getItem("casepartner.tipsOff") !== "1"
   );
   const recorder = useRef(new MicRecorder());
   const vad = useRef(new VadMonitor());
@@ -376,7 +376,7 @@ export function InterviewScreen({ settings, caseData, onExit }: Props) {
                 onClick={() => {
                   const next = !tipsOn;
                   setTipsOn(next);
-                  localStorage.setItem("casesim.tipsOff", next ? "0" : "1");
+                  localStorage.setItem("casepartner.tipsOff", next ? "0" : "1");
                 }}
                 title="Show or hide beginner guidance for the current stage"
               >

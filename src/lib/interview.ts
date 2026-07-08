@@ -17,7 +17,7 @@ export const STAGE_LABELS: Record<InterviewStage, string> = {
   wrap_up: "Wrap-up",
 };
 
-/** How the app behaves in each stage — orientation for someone new to CaseSim
+/** How the app behaves in each stage — orientation for someone new to CasePartner
  * (not case-interview coaching). Shown via the Tips toggle in the interview UI.
  * The interviewer's own internal stage instructions are never shown. */
 export const STAGE_HINTS: Record<InterviewStage, string> = {

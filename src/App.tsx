@@ -22,6 +22,16 @@ function App() {
   const [loadError, setLoadError] = useState("");
   const [report, setReport] = useState<HealthRow[] | null>(null);
   const [checking, setChecking] = useState(false);
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    const saved = localStorage.getItem("casepartner.theme");
+    if (saved === "light" || saved === "dark") return saved;
+    return window.matchMedia?.("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("casepartner.theme", theme);
+  }, [theme]);
 
   const runChecks = useCallback(async (s: AppSettings) => {
     setChecking(true);
@@ -107,39 +117,49 @@ function App() {
       <header className="app-header">
         <div className="brand">
           <span className="brand-mark" aria-hidden="true">
-            CS
+            CP
           </span>
           <div>
-            <h1>CaseSim</h1>
+            <h1>CasePartner</h1>
             <p className="tagline">Practice case interviews out loud</p>
           </div>
         </div>
-        <nav className="tabs">
+        <div className="header-right">
+          <nav className="tabs">
+            <button
+              className={tab === "cases" ? "tab active" : "tab"}
+              onClick={() => setTab("cases")}
+            >
+              Cases
+            </button>
+            <button
+              className={tab === "drills" ? "tab active" : "tab"}
+              onClick={() => setTab("drills")}
+            >
+              Drills
+            </button>
+            <button
+              className={tab === "history" ? "tab active" : "tab"}
+              onClick={() => setTab("history")}
+            >
+              History
+            </button>
+            <button
+              className={tab === "setup" ? "tab active" : "tab"}
+              onClick={() => setTab("setup")}
+            >
+              Setup
+            </button>
+          </nav>
           <button
-            className={tab === "cases" ? "tab active" : "tab"}
-            onClick={() => setTab("cases")}
+            className="theme-toggle"
+            onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+            title={theme === "dark" ? "Switch to light mode" : "Switch to night mode"}
+            aria-label="Toggle night mode"
           >
-            Cases
+            {theme === "dark" ? "☀️" : "🌙"}
           </button>
-          <button
-            className={tab === "drills" ? "tab active" : "tab"}
-            onClick={() => setTab("drills")}
-          >
-            Drills
-          </button>
-          <button
-            className={tab === "history" ? "tab active" : "tab"}
-            onClick={() => setTab("history")}
-          >
-            History
-          </button>
-          <button
-            className={tab === "setup" ? "tab active" : "tab"}
-            onClick={() => setTab("setup")}
-          >
-            Setup
-          </button>
-        </nav>
+        </div>
       </header>
 
       {tab === "cases" && (
